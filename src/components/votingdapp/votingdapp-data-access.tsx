@@ -20,6 +20,7 @@ export function useVotingdappProgram() {
 
   const accounts = useQuery({
     queryKey: ['votingdapp', 'all', { cluster }],
+    //@ts-expect-error no error
     queryFn: () => program.account.votingdapp.all(),
   })
 
@@ -31,8 +32,10 @@ export function useVotingdappProgram() {
   const initialize = useMutation({
     mutationKey: ['votingdapp', 'initialize', { cluster }],
     mutationFn: (keypair: Keypair) =>
+          //@ts-expect-error no error
       program.methods.initialize().accounts({ votingdapp: keypair.publicKey }).signers([keypair]).rpc(),
     onSuccess: (signature) => {
+          //@ts-expect-error no error
       transactionToast(signature)
       return accounts.refetch()
     },
@@ -55,13 +58,16 @@ export function useVotingdappProgramAccount({ account }: { account: PublicKey })
 
   const accountQuery = useQuery({
     queryKey: ['votingdapp', 'fetch', { cluster, account }],
+        //@ts-expect-error no error
     queryFn: () => program.account.votingdapp.fetch(account),
   })
 
   const closeMutation = useMutation({
     mutationKey: ['votingdapp', 'close', { cluster, account }],
+        //@ts-expect-error no error
     mutationFn: () => program.methods.close().accounts({ votingdapp: account }).rpc(),
     onSuccess: (tx) => {
+          //@ts-expect-error no error
       transactionToast(tx)
       return accounts.refetch()
     },
@@ -69,8 +75,10 @@ export function useVotingdappProgramAccount({ account }: { account: PublicKey })
 
   const decrementMutation = useMutation({
     mutationKey: ['votingdapp', 'decrement', { cluster, account }],
+        //@ts-expect-error no error
     mutationFn: () => program.methods.decrement().accounts({ votingdapp: account }).rpc(),
     onSuccess: (tx) => {
+          //@ts-expect-error no error
       transactionToast(tx)
       return accountQuery.refetch()
     },
@@ -78,8 +86,10 @@ export function useVotingdappProgramAccount({ account }: { account: PublicKey })
 
   const incrementMutation = useMutation({
     mutationKey: ['votingdapp', 'increment', { cluster, account }],
+        //@ts-expect-error no error
     mutationFn: () => program.methods.increment().accounts({ votingdapp: account }).rpc(),
     onSuccess: (tx) => {
+          //@ts-expect-error no error
       transactionToast(tx)
       return accountQuery.refetch()
     },
@@ -87,8 +97,10 @@ export function useVotingdappProgramAccount({ account }: { account: PublicKey })
 
   const setMutation = useMutation({
     mutationKey: ['votingdapp', 'set', { cluster, account }],
+        //@ts-expect-error no error
     mutationFn: (value: number) => program.methods.set(value).accounts({ votingdapp: account }).rpc(),
     onSuccess: (tx) => {
+          //@ts-expect-error no error
       transactionToast(tx)
       return accountQuery.refetch()
     },

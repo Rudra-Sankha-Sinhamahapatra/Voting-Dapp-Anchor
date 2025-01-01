@@ -39,7 +39,7 @@ export function VotingdappList() {
         <span className="loading loading-spinner loading-lg"></span>
       ) : accounts.data?.length ? (
         <div className="grid md:grid-cols-2 gap-4">
-          {accounts.data?.map((account) => (
+          {accounts.data?.map((account:{publicKey:PublicKey}) => (
             <VotingdappCard key={account.publicKey.toString()} account={account.publicKey} />
           ))}
         </div>
